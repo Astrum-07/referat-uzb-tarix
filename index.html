@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REFERAT: O'zbekiston Ta'lim Islohotlari</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: #002347;
+            --primary-blue: #003366;
+            --secondary-green: #2ecc71;
+            --accent-gold: #f39c12;
+            --text-dark: #1a1a1a;
+            --bg-gray: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #e9ecef;
+            color: var(--text-dark);
+            line-height: 1.8;
+            padding: 10px;
+        }
+
+        /* Referat Sahifasi - Paper Style */
+        .referat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 50px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        /* Titul */
+        .titul {
+            text-align: center;
+            border-bottom: 4px double var(--primary-blue);
+            padding-bottom: 40px;
+            margin-bottom: 50px;
+        }
+
+        .titul h4 { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; color: #666; }
+        .titul h1 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: var(--primary-dark); margin: 20px 0; text-transform: uppercase; }
+        .titul .subject { font-weight: 700; color: var(--primary-blue); font-size: 1.1rem; }
+
+        /* Sarlavhalar */
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary-blue);
+            margin: 50px 0 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-green);
+            position: relative;
+        }
+
+        h3 { font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--secondary-green); margin-top: 30px; }
+
+        /* Matn */
+        p { margin-bottom: 25px; text-align: justify; text-indent: 35px; font-size: 1.05rem; }
+        
+        /* Vizual Elementlar */
+        .img-box { margin: 40px 0; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+        .img-box img { width: 100%; display: block; filter: brightness(0.95); transition: 0.5s; }
+        .img-box:hover img { filter: brightness(1.05); transform: scale(1.02); }
+        .caption { font-size: 0.85rem; color: #777; font-style: italic; text-align: center; margin-top: 10px; }
+
+        /* Diagrammalar Section */
+        .chart-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            margin: 40px 0;
+            border: 1px solid #eee;
+        }
+
+        .chart-container { 
+            position: relative; 
+            height: 350px; 
+            width: 100%; 
+        }
+
+        /* Iqtibos */
+        .quote-box {
+            background: #f1f6ff;
+            border-left: 6px solid var(--primary-blue);
+            padding: 30px;
+            margin: 40px 0;
+            font-style: italic;
+            border-radius: 0 15px 15px 0;
+            color: var(--primary-dark);
+        }
+
+        /* Manbalar */
+        .footer-sources {
+            margin-top: 80px;
+            border-top: 1px solid #ddd;
+            padding-top: 30px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* Responsive - Telefonlar uchun */
+        @media (max-width: 600px) {
+            .referat-container { padding: 40px 20px; }
+            .titul h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            p { font-size: 1rem; text-indent: 20px; }
+            .chart-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <article class="referat-container" data-aos="fade-in">
+        
+        <header class="titul">
+            <h4>O'ZBEKISTON RESPUBLIKASI</h4>
+            <h1>REFERAT</h1>
+            <p class="subject">MAVZU: TA’LIM TIZIMIDAGI ISLOHOTLAR (2016-2024)</p>
+           
+        </header>
+
+        <section>
+            <h2>KIRISH</h2>
+            <p>Ta’lim tizimi har qanday davlatning taraqqiyotini va kelajagini belgilovchi eng muhim sohadir. O‘zbekistonda 2016-yildan boshlangan yangi taraqqiyot bosqichida ta’limga investitsiya kiritish — inson kapitaliga sarmoya kiritish deb belgilandi. "Ta’lim — bu hayot-mamot masalasi" degan tamoyil islohotlarning o‘zagiga aylandi. Ushbu referatda darslik materiallari asosida so‘nggi 8 yildagi maktabgacha, maktab va oliy ta’limdagi o‘zgarishlarni tahlil qilamiz.</p>
+        </section>
+
+        <!-- MTT BO'LIMI -->
+        <section id="mtt">
+            <h2>1. MAKTABGACHA TA’LIM: SIFATLI POYDEVOR</h2>
+            <p>2017-yilda sohada inqilobiy o'zgarish bo'ldi — Maktabgacha ta’lim vazirligi tashkil etildi. Darslik ma'lumotlariga ko'ra, 2016-yilda bog‘chalar soni bor-yo‘g‘i 4 500 ta bo‘lib, bu juda past ko'rsatkich edi. Islohotlar natijasida bog‘chalar soni 8 baravardan ziyodga oshdi.</p>
+            
+            <div class="img-box" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1200" alt="Kindergarten">
+                <p class="caption">Zamonaviy maktabgacha ta'lim muassasasidagi interaktiv mashg'ulotlar</p>
+            </div>
+
+            <p>Quyidagi diagrammada bog'chalar sonining 2017-yildan 2024-yilgacha bo'lgan darslikdagi aniq yillik o'sishi ko'rsatilgan:</p>
+
+            <div class="chart-card" data-aos="fade-up">
+                <h3 style="text-align: center; margin-bottom: 15px; font-size: 0.9rem;">MTTlar soni (Yillar kesimida)</h3>
+                <div class="chart-container">
+                    <canvas id="mttChart"></canvas>
+                </div>
+            </div>
+
+            <p>Bugungi kunda bolalarning bog‘cha bilan qamrab olinishi 2016-yildagi 27% dan 2024-yilda 76% ga yetkazildi. Bu nafaqat davlat, balki xususiy va oilaviy bog‘chalarning rivojlanishi hisobiga amalga oshirildi.</p>
+        </section>
+
+        <!-- MAKTAB BO'LIMI -->
+        <section id="maktab">
+            <h2>2. MAKTAB TA’LIMI: 11 YILLIK TIZIMNING QAYTISHI</h2>
+            <p>Darslikning 68-betida keltirilganidek, 2017-yildan boshlab maktablarda 11 yillik majburiy ta’lim tizimi qayta tiklandi. Bu o'quvchilarning bilim olish jarayoni uzilib qolmasligini ta'minladi.</p>
+
+            <div class="quote-box" data-aos="fade-left">
+                "Farzandlarimiz maktabdan qanchalik bilimli bo‘lib chiqsa, yuqori texnologiyalarga asoslangan iqtisodiyot tarmoqlari shuncha tez rivojlanadi." - Shavkat Mirziyoyev.
+            </div>
+
+            <p>Iqtidorli yoshlar uchun yaratilgan yangi imkoniyatlar:</p>
+            <ul>
+                <li><b>Prezident maktablari:</b> Barcha viloyatlarda ochilgan zamonaviy ta'lim maskanlari.</li>
+                <li><b>Ixtisoslashgan maktablar:</b> Al-Xorazmiy, Mirzo Ulug‘bek va Ibn Sino nomidagi chuqur o'qitish maktablari.</li>
+                <li><b>Ijod maktablari:</b> Abdulla Qodiriy, Halima Xudoyberdiyeva kabi adiblar nomidagi maktablar.</li>
+            </ul>
+
+            <div class="img-box" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200" alt="Students">
+                <p class="caption">Zamonaviy o'quv laboratoriyalarida tajriba o'tkazayotgan yoshlar</p>
+            </div>
+        </section>
+
+        <!-- OTM BO'LIMI -->
+        <section id="otm">
+            <h2>3. OLIY TA’LIM TIZIMI: GLOBAL REYTINGLAR SARI</h2>
+            <p>Oliy ta’limda muassasalar soni rekord darajada oshdi. 2016-yilda O'zbekistonda bor-yo'g'i 77 ta OTM bor edi. Bugun bu ko'rsatkich bir necha barobar ko'payib, talabalarga tanlash imkonini bermoqda.</p>
+
+            <div class="chart-card" data-aos="fade-up">
+                <h3 style="text-align: center; margin-bottom: 20px; font-size: 0.9rem;">OTMlar sonining yillik dinamikasi (2016-2024)</h3>
+                <div class="chart-container">
+                    <canvas id="otmChart"></canvas>
+                </div>
+            </div>
+
+            <p>Hozirda 222 ta oliygoh faoliyat ko'rsatmoqda. Muhim yutuqlardan biri — O'zbekistonning 23 ta universiteti QS xalqaro reytingida qayd etilganidir. Shuningdek, nufuzli xorijiy universitetlar bilan hamkorlikda "Ikki diplomli" tizim muvaffaqiyatli ishlamoqda.</p>
+        </section>
+
+        <section id="xulosa">
+            <h2>XULOSA</h2>
+            <p>O‘zbekiston ta’lim tizimidagi islohotlar "Inson qadri uchun" tamoyili asosida davom etmoqda. Bog‘chadan boshlab oliygohgacha bo‘lgan uzluksiz ta’lim tizimi yaratildi. Bu islohotlar natijasida yurtimizda Uchinchi Renessans poydevori mustahkamlanmoqda va yoshlarimiz dunyo mehnat bozorida raqobatbardosh bo‘lib bormoqda.</p>
+        </section>
+
+        <footer class="footer-sources">
+            <p><b>Foydalanilgan manbalar:</b></p>
+            <p>1. O'zbekiston tarixi, 11-sinf darsligi (10-mavzu, 66-70 betlar).</p>
+            <p>2. O'zbekiston Respublikasi Maktabgacha va maktab ta'limi vazirligi rasmiy statistikasi (2024).</p>
+            <p style="text-align: center; margin-top: 30px; font-size: 0.7rem; opacity: 0.6;">&copy; 2024 Elektron Referat - Ta'lim Islohotlari</p>
+        </footer>
+
+    </article>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Chart Configs
+        const chartPlugins = {
+            legend: { labels: { font: { family: 'Montserrat', size: 11, weight: '600' } } }
+        };
+
+        const mobileScale = {
+            y: { ticks: { font: { size: 10 } }, beginAtZero: true },
+            x: { ticks: { font: { size: 10 } } }
+        };
+
+        // MTT CHART (Line)
+        const ctxMtt = document.getElementById('mttChart').getContext('2d');
+        const mttGrad = ctxMtt.createLinearGradient(0, 0, 0, 350);
+        mttGrad.addColorStop(0, 'rgba(46, 204, 113, 0.4)');
+        mttGrad.addColorStop(1, 'rgba(46, 204, 113, 0.05)');
+
+        new Chart(ctxMtt, {
+            type: 'line',
+            data: {
+                labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Bog\'chalar soni',
+                    data: [5211, 7104, 13530, 18254, 27609, 29420, 30792, 38000],
+                    borderColor: '#27ae60',
+                    backgroundColor: mttGrad,
+                    borderWidth: 4,
+                    fill: true,
+                    tension: 0.3,
+                    pointBackgroundColor: '#27ae60',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: chartPlugins,
+                scales: mobileScale
+            }
+        });
+
+        // OTM CHART (Premium Bar)
+        const ctxOtm = document.getElementById('otmChart').getContext('2d');
+        const otmGrad = ctxOtm.createLinearGradient(0, 0, 0, 350);
+        otmGrad.addColorStop(0, '#003366');
+        otmGrad.addColorStop(1, '#0056b3');
+
+        new Chart(ctxOtm, {
+            type: 'bar',
+            data: {
+                labels: ['2016', '2021', '2022', '2023', '2024'],
+                datasets: [{
+                    label: 'Universitetlar soni',
+                    data: [77, 130, 199, 213, 222],
+                    backgroundColor: otmGrad,
+                    borderRadius: 10,
+                    barThickness: 'flex',
+                    maxBarThickness: 45
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: chartPlugins,
+                scales: mobileScale
+            }
+        });
+    </script>
+</body>
+</html>
