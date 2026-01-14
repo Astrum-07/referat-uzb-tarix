@@ -10,14 +10,13 @@
     
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
             --primary: #003366;
             --secondary: #1e8449;
-            --accent: #b21f1f;
-            --bg-page: #dcdde1;
+            --accent: #f1c40f; /* Sariq yulduzlar uchun */
+            --bg-night: #020111; /* Tun rangi (qora-to'q ko'k) */
             --white: #ffffff;
             --text-main: #2c3e50;
         }
@@ -27,23 +26,83 @@
 
         body {
             font-family: 'Merriweather', serif;
-            background-color: var(--bg-page);
+            /* Tungi osmon gradenti */
+            background: linear-gradient(to bottom, #020111 0%, #050520 50%, #0c0d28 100%);
             color: var(--text-main);
             line-height: 1.8;
-            padding: 20px 0;
+            padding: 40px 0;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* Referat Qog'ozi */
+        /* --- TUNGI OSMON VA YULDUZLAR ANIMATSIYASI --- */
+        .sky-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Mitti miltillovchi yulduzlar */
+        .star-point {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Uchayotgan sariq yulduzlar */
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px var(--accent);
+            animation: shoot var(--speed) linear infinite;
+            opacity: 0;
+        }
+
+        /* Uchayotgan yulduzning dumi */
+        .shooting-star::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        @keyframes shoot {
+            0% { transform: translate(0, 0) rotate(215deg); opacity: 0; }
+            5% { opacity: 1; }
+            15% { transform: translate(-400px, 400px) rotate(215deg); opacity: 0; }
+            100% { transform: translate(-400px, 400px) rotate(215deg); opacity: 0; }
+        }
+
+        /* --- REFERAT DIZAYNI (Oq qog'oz effekti) --- */
         .referat-body {
             max-width: 1000px;
             margin: 0 auto;
             background: var(--white);
             padding: 80px 100px;
-            box-shadow: 0 0 40px rgba(0,0,0,0.15);
-            border-radius: 2px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border-radius: 4px;
+            position: relative;
+            z-index: 10;
         }
 
-        /* Titul Sahifasi */
         .titul-section {
             text-align: center;
             border-bottom: 4px double var(--primary);
@@ -51,11 +110,9 @@
             margin-bottom: 80px;
         }
 
-        .titul-section h4 { font-family: 'Montserrat'; font-size: 0.8rem; letter-spacing: 2px; color: #7f8c8d; text-transform: uppercase; }
+        .titul-section h4 { font-family: 'Montserrat'; font-size: 0.8rem; color: #7f8c8d; text-transform: uppercase; }
         .titul-section h1 { font-family: 'Montserrat'; font-size: clamp(1.5rem, 5vw, 3rem); color: var(--primary); margin: 20px 0; font-weight: 800; }
-        .titul-section .sub-title { font-weight: bold; font-size: 1.2rem; color: #333; line-height: 1.4; }
 
-        /* Sarlavhalar */
         h2 {
             font-family: 'Montserrat';
             font-size: clamp(1.2rem, 4vw, 1.8rem);
@@ -66,50 +123,36 @@
             background: #f4fcf7;
         }
 
-        h3 { font-family: 'Montserrat'; margin: 30px 0 15px; color: var(--secondary); font-size: 1.1rem; }
-
-        /* Matn Uslubi */
         p { margin-bottom: 25px; text-align: justify; text-indent: 40px; font-size: 1.1rem; }
-        ul { margin: 0 0 25px 40px; }
-        li { margin-bottom: 12px; font-size: 1.05rem; }
 
-        /* Rasmlar Konteyneri */
         .img-wrapper { margin: 40px 0; text-align: center; }
         .img-wrapper img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            display: block;
         }
-        .img-caption { font-size: 0.9rem; color: #666; margin-top: 12px; font-style: italic; }
 
-        /* Diagrammalar Section */
         .chart-box {
             background: #fff;
             padding: 20px 10px;
             border: 1px solid #eee;
             border-radius: 12px;
             margin: 40px 0;
+            height: 400px;
             width: 100%;
-            height: 400px; /* Kompyuterda balandlik */
-            position: relative;
         }
 
-        /* Iqtiboslar */
         .quote-box {
-            background: #eef2f3;
+            background: #f1f8ff;
             border-left: 8px solid var(--primary);
             padding: 30px;
             margin: 45px 0;
             font-size: 1.2rem;
             font-style: italic;
-            color: #34495e;
-            border-radius: 0 15px 15px 0;
         }
 
-        /* Manbalar */
-        .footer-ref {
+        footer {
             margin-top: 100px;
             border-top: 1px solid #ccc;
             padding-top: 40px;
@@ -117,120 +160,131 @@
             color: #555;
         }
 
-        /* --- RESPONSIVE FIXES (500px dan pastda width: 100%) --- */
-        @media (max-width: 800px) {
-            .referat-body { padding: 50px 40px; }
-        }
-
+        /* Responsive - Mobil versiya */
         @media (max-width: 500px) {
+            .referat-body { padding: 40px 15px; width: 100%; box-shadow: none; border-radius: 0; }
+            p { text-indent: 20px; font-size: 1rem; }
+            .chart-box { height: 320px; }
             body { padding: 0; }
-            .referat-body { padding: 40px 15px; box-shadow: none; border-radius: 0; width: 100%; }
-            p { text-indent: 20px; font-size: 1rem; line-height: 1.6; }
-            .chart-box { height: 320px; padding: 10px 0; width: 100%; }
-            .titul h1 { font-size: 1.4rem; }
-            .quote-box { padding: 20px; font-size: 1rem; }
-            h2 { font-size: 1.15rem; }
-        }
-
-        @media (max-width: 280px) {
-            .titul-section h1 { font-size: 1.2rem; }
-            h2 { font-size: 1rem; padding-left: 10px; }
-            .chart-box { height: 280px; }
         }
     </style>
 </head>
 <body>
 
-    <article class="referat-body" data-aos="fade-in">
+    <!-- Tungi osmon konteyneri -->
+    <div class="sky-container" id="sky"></div>
+
+    <article class="referat-body">
         
-        <!-- TITUL SAHIFASI -->
         <header class="titul-section">
             <h4>O'ZBEKISTON RESPUBLIKASI</h4>
             <h1>REFERAT</h1>
-            <p class="sub-title">MAVZU: TA’LIM TIZIMIDAGI ISLOHOTLAR: STATISTIK TAHLIL VA YANGI BOSQICH (2016-2024)</p>
-           
+            <p style="font-weight: bold; font-size: 1.2rem;">MAVZU: TA’LIM TIZIMIDAGI ISLOHOTLAR (2016-2024)</p>
         </header>
 
-        <!-- KIRISH -->
         <section>
             <h2>KIRISH</h2>
-            <p>Ta’lim tizimi har qanday jamiyat taraqqiyotining strategik asosi hisoblanadi. O‘zbekiston Respublikasida 2016-yildan e'tiboran barcha sohalar qatori ta’lim tizimini tubdan isloh qilish davlat siyosatining eng ustuvor yo‘nalishiga aylandi. "Yangi O‘zbekiston — maktab ostonasidan boshlanadi" degan ezgu g'oya asosida amalga oshirilayotgan ushbu islohotlar "Uchinchi Renessans" poydevorini yaratishga xizmat qilmoqda.</p>
-            <p>Ushbu referatda darslik materiallari va rasmiy statistik ma’lumotlar asosida maktabgacha ta’lim, umumiy o‘rta ta’lim hamda oliy ta’lim tizimidagi so‘nggi yetti yillikdagi sifat va miqdor o‘zgarishlari tahlil qilinadi.</p>
+            <p>O‘zbekistonda 2016-yildan e'tiboran barcha sohalar qatori ta’lim tizimini tubdan isloh qilish davlat siyosatining ustuvor yo‘nalishiga aylandi. Ta'lim — kelajak poydevori bo'lib, "Yangi O'zbekiston" g'oyasining asosiy ustunidir.</p>
         </section>
 
-        <!-- 1. MAKTABGACHA TA'LIM -->
         <section id="mtt">
-            <h2>1. MAKTABGACHA TA’LIM TIZIMINING RIVOJLANISHI</h2>
-            <p>2017-yilda mustaqil Maktabgacha ta’lim vazirligining tashkil etilishi sohada inqilobiy o'zgarishlarga sabab bo'ldi. Darslikda keltirilganidek, 2016-yilda mamlakatda bog'chalar soni bor-yo'g'i <b>4 500 ta</b> bo'lib, bolalarning qamrov darajasi 27 foiz atrofida edi. Ushbu muammoni hal qilish uchun davlat-xususiy sheriklik va oilaviy bog'chalar tizimi joriy etildi.</p>
+            <h2>1. MAKTABGACHA TA’LIM TIZIMI</h2>
+            <p>Darslik ma'lumotlariga ko'ra, 2016-yilda bog'chalar soni bor-yo'g'i 4 500 ta edi. Bugun bu ko'rsatkich bir necha barobar oshdi.</p>
             
-            <div class="chart-box" data-aos="fade-up">
+            <div class="chart-box">
                 <canvas id="mttChart"></canvas>
             </div>
 
-            <div class="img-wrapper" data-aos="zoom-in">
-                <img src="bogcha.jpeg" alt="Kindergarten in Uzbekistan">
-                <p class="img-caption">Zamonaviy maktabgacha ta'lim muassasasidagi innovatsion o'quv xonasi</p>
+            <div class="img-wrapper">
+                <img src="bogcha.jpeg" alt="MTT">
             </div>
-
-            <p>Statistik tahlillar shuni ko'rsatadiki, 2024-yilga kelib maktabgacha ta'lim muassasalari soni <b>38 000 taga</b>, qamrov esa <b>76 foizga</b> yetkazildi. Bu nafaqat binolar sonida, balki o'qitish metodikasining yangilanishida ham o'z aksini topmoqda.</p>
         </section>
 
-        <!-- 2. MAKTAB TA'LIMI -->
         <section id="maktab">
-            <h2>2. MAKTAB TA’LIMI: 11 YILLIK TIZIM VA ELITA MAKTABLAR</h2>
-            <p>2017-yilda maktab ta'limida tarixiy burilish yuz berdi: avvalgi 9+3 tizimidan voz kechilib, to'liq <b>11 yillik majburiy ta'lim</b> tizimi qayta tiklandi. Bu o'quvchilarning psixologik rivojlanishi va bilim olish uzviyligini ta'minlashda muhim rol o'ynadi.</p>
+            <h2>2. MAKTAB TA’LIMI: YANGI BOSQICH</h2>
+            <p>2017-yilda 11 yillik majburiy ta'lim tizimining qayta tiklanishi o'quvchilar hayotida muhim o'rin tutdi.</p>
 
-            <div class="quote-box" data-aos="fade-left">
+            <div class="quote-box">
                 "Farzandlarimiz maktabdan qanchalik bilimli bo‘lib chiqsa, yuqori texnologiyalarga asoslangan iqtisodiyot tarmoqlari shuncha tez rivojlanadi." - Shavkat Mirziyoyev.
             </div>
 
-            <p>Iqtidorli yoshlarni qo'llab-quvvatlash uchun barcha viloyat markazlarida <b>Prezident maktablari</b>, aniq fanlarga ixtisoslashtirilgan Muhammad al-Xorazmiy va Mirzo Ulug‘bek nomidagi maktablar hamda buyuk adiblar nomidagi ijod maktablari tarmog'i yaratildi. 2023-yil holatiga ko'ra, barcha umumta'lim maktablarida o'quv dasturlari xalqaro andozalar asosida yangilandi.</p>
-
-            <div class="img-wrapper" data-aos="zoom-in">
-                <img src="./maktab.webp" alt="Uzbekistan Education School">
-                <p class="img-caption">Prezident maktablarida zamonaviy AKT vositalari yordamida o'tilayotgan dars jarayoni</p>
+            <div class="img-wrapper">
+                <img src="maktab.webp" alt="Maktab">
             </div>
         </section>
 
-        <!-- 3. OLIY TA'LIM -->
         <section id="otm">
-            <h2>3. OLIY TA’LIM TIZIMI: MIQDOR VA SIFAT YUKALISHI</h2>
-            <p>Oliy ta’limda muassasalar soni va talabalar qamrovi rekord darajada o'sdi. 2016-yilda O'zbekistonda jami universitetlar soni bor-yo'g'i <b>77 ta</b> bo'lgan bo'lsa, bugungi kunda bu ko'rsatkich bir necha barobar oshdi. Quyidagi bar-chart darslik grafiklari asosida universitetlar sonining dinamikasini ko'rsatadi:</p>
+            <h2>3. OLIY TA’LIM TIZIMI</h2>
+            <p>Oliy ta’limda muassasalar soni 2016-yildagi 77 tadan 2024-yilga kelib 222 taga yetkazildi.</p>
 
-            <div class="chart-box" data-aos="fade-up">
+            <div class="chart-box">
                 <canvas id="otmChart"></canvas>
             </div>
 
-            <p>Bugungi kunda mamlakatimizda <b>222 ta</b> oliy ta’lim muassasasi faoliyat yuritmoqda. Ulardan 23 tasi nufuzli xalqaro QS (Quacquarelli Symonds) reytingidan joy oldi. Xorijiy nufuzli universitetlar bilan "Ikki diplomli" (Double Degree) tizimining yo'lga qo'yilishi yoshlarimiz uchun jahon andozalari darajasidagi ta'lim olish eshiklarini ochdi.</p>
-
-            <div class="img-wrapper" data-aos="zoom-in">
-                <img src="./univer.webp" alt="University in Uzbekistan">
-                <p class="img-caption">Yangi tashkil etilgan zamonaviy universitet binolari va akademik muhit</p>
+            <div class="img-wrapper">
+                <img src="univer.webp" alt="OTM">
             </div>
         </section>
 
-        <!-- XULOSA -->
         <section>
-            <h2>XULOSA VA ISTIQBOLLAR</h2>
-            <p>Xulosa qilib aytganda, O‘zbekistonda ta’lim sohasidagi islohotlar keng qamrovli va strategik xarakterga ega. Bog‘chadan boshlab oliygohgacha bo‘lgan uzluksiz ta’lim zanjiri yaratildi. "O‘zbekiston-2030" strategiyasiga ko'ra, oliy ta'lim bilan qamrab olishni 50 foizga yetkazish hamda kamida 10 ta universitetimizni dunyoning TOP-1000 taligiga kiritish bosh maqsad qilib belgilangan. Bu vazifalar mamlakatimizning kelajakdagi intellektual salohiyatini ta'minlaydi.</p>
+            <h2>XULOSA</h2>
+            <p>Xulosa qilib aytganda, O‘zbekiston ta’lim sohasidagi islohotlar keng qamrovli va strategik xarakterga ega bo'lib, sifatli kadrlar tayyorlashga xizmat qilmoqda.</p>
         </section>
 
-        <!-- MANBALAR -->
-        <footer class="footer-ref">
-            <p><b>FOYDALANILGAN MANBALAR:</b></p>
-            <p>1. O'zbekiston tarixi (1917–2024 yillar). 11-sinf darsligi (10-mavzu, 66-70-betlar).</p>
-            <p>2. O'zbekiston Respublikasi Maktabgacha va maktab ta'limi vazirligi rasmiy statistikasi (2024).</p>
-            <p>3. O'zbekiston Respublikasi Prezidentining ta'limga oid farmon va qarorlari.</p>
-            <p style="text-align: center; margin-top: 40px; opacity: 0.5; font-size: 0.8rem;">© 2024 Elektron Akademik Referat Loyihasi</p>
+        <footer>
+            <p><b>MANBALAR:</b> 11-sinf O'zbekiston tarixi darsligi (66-70 betlar). </p>
+            <p style="text-align: center; margin-top: 40px; opacity: 0.5;">© 2024 Akademik Referat</p>
         </footer>
-
     </article>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: true });
+        // --- TUNGI OSMON GENERATORI ---
+        function createNightSky() {
+            const sky = document.getElementById('sky');
+            
+            // 1. Miltillovchi mitti yulduzlarni yaratish
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star-point';
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const size = Math.random() * 3;
+                const duration = 2 + Math.random() * 5;
 
-        // Chart Data Labels Plugin (Sonlarni diagramma ustida doimiy ko'rsatish)
+                star.style.left = x + 'vw';
+                star.style.top = y + 'vh';
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.setProperty('--duration', duration + 's');
+                sky.appendChild(star);
+            }
+
+            // 2. Uchayotgan sariq yulduzlarni yaratish funksiyasi
+            function createShootingStar() {
+                const sStar = document.createElement('div');
+                sStar.className = 'shooting-star';
+                const x = 50 + Math.random() * 50; // O'ng tomondan boshlash
+                const y = Math.random() * 50; // Yuqoridan boshlash
+                const speed = 2 + Math.random() * 3;
+
+                sStar.style.left = x + 'vw';
+                sStar.style.top = y + 'vh';
+                sStar.style.setProperty('--speed', speed + 's');
+                
+                sky.appendChild(sStar);
+
+                // Animatsiyadan keyin elementni o'chirish
+                setTimeout(() => {
+                    sStar.remove();
+                }, speed * 1000);
+            }
+
+            // Har 2 soniyada bitta uchayotgan yulduz chiqarish
+            setInterval(createShootingStar, 2000);
+        }
+        createNightSky();
+
+        // --- DIAGRAMMALAR ---
         const labelsPlugin = {
             id: 'labelsPlugin',
             afterDatasetsDraw(chart) {
@@ -239,7 +293,6 @@
                 ctx.font = 'bold 11px Montserrat';
                 ctx.fillStyle = '#1a1a1a';
                 ctx.textAlign = 'center';
-
                 chart.data.datasets.forEach((dataset, i) => {
                     chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
                         const value = dataset.data[index];
@@ -252,20 +305,14 @@
         const chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
-            layout: { padding: { top: 30, left: 5, right: 5 } },
             plugins: { legend: { display: false } },
             scales: {
                 y: { display: false, beginAtZero: true },
-                x: { 
-                    grid: { display: false },
-                    ticks: { font: { size: 10, family: 'Montserrat', weight: '600' }, maxRotation: 45, minRotation: 0 }
-                }
+                x: { grid: { display: false }, ticks: { font: { size: 10, family: 'Montserrat', weight: '600' } } }
             }
         };
 
-        // MTT CHART (2017-2024 yillik o'sish)
-        const ctxMtt = document.getElementById('mttChart').getContext('2d');
-        new Chart(ctxMtt, {
+        new Chart(document.getElementById('mttChart'), {
             type: 'line',
             plugins: [labelsPlugin],
             data: {
@@ -274,19 +321,14 @@
                     data: [5211, 7104, 13530, 18254, 27609, 29420, 30792, 38000],
                     borderColor: '#1e8449',
                     backgroundColor: 'rgba(30, 132, 73, 0.1)',
-                    borderWidth: 3,
                     fill: true,
-                    tension: 0.3,
-                    pointRadius: 4,
-                    pointBackgroundColor: '#1e8449'
+                    tension: 0.3
                 }]
             },
             options: chartOptions
         });
 
-        // OTM CHART (2016-2024 dinamika)
-        const ctxOtm = document.getElementById('otmChart').getContext('2d');
-        new Chart(ctxOtm, {
+        new Chart(document.getElementById('otmChart'), {
             type: 'bar',
             plugins: [labelsPlugin],
             data: {
@@ -294,9 +336,7 @@
                 datasets: [{
                     data: [77, 130, 199, 213, 222],
                     backgroundColor: '#003366',
-                    borderRadius: 6,
-                    barThickness: 'flex',
-                    maxBarThickness: 40
+                    borderRadius: 6
                 }]
             },
             options: chartOptions
