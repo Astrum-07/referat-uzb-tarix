@@ -2,344 +2,411 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>REFERAT: Ta’lim Tizimidagi Islohotlar (2016-2024)</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ta'lim Islohotlari - Kengaytirilgan Referat</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #003366;
-            --secondary: #1e8449;
-            --accent: #f1c40f; /* Sariq yulduzlar uchun */
-            --bg-night: #020111; /* Tun rangi (qora-to'q ko'k) */
-            --white: #ffffff;
-            --text-main: #2c3e50;
+            --primary-color: #2c3e50;
+            --accent-color: #2ecc71;
+            --secondary-color: #3498db;
+            --text-dark: #2d3436;
+            --bg-light: #f4f7f6;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
         body {
-            font-family: 'Merriweather', serif;
-            /* Tungi osmon gradenti */
-            background: linear-gradient(to bottom, #020111 0%, #050520 50%, #0c0d28 100%);
-            color: var(--text-main);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.8;
-            padding: 40px 0;
-            position: relative;
             overflow-x: hidden;
-            min-height: 100vh;
         }
 
-        /* --- TUNGI OSMON VA YULDUZLAR ANIMATSIYASI --- */
-        .sky-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        /* Hero Section */
+        header {
+            min-height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
         }
 
-        /* Mitti miltillovchi yulduzlar */
-        .star-point {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: twinkle var(--duration) infinite ease-in-out;
+        header h1 {
+            font-size: clamp(1.8rem, 5vw, 3.5rem); /* Responsive font size */
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            animation: fadeInDown 1s ease;
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+        header p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 900px;
+            opacity: 0.9;
+            animation: fadeInUp 1.2s ease;
         }
 
-        /* Uchayotgan sariq yulduzlar */
-        .shooting-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px var(--accent);
-            animation: shoot var(--speed) linear infinite;
-            opacity: 0;
-        }
-
-        /* Uchayotgan yulduzning dumi */
-        .shooting-star::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-        }
-
-        @keyframes shoot {
-            0% { transform: translate(0, 0) rotate(215deg); opacity: 0; }
-            5% { opacity: 1; }
-            15% { transform: translate(-400px, 400px) rotate(215deg); opacity: 0; }
-            100% { transform: translate(-400px, 400px) rotate(215deg); opacity: 0; }
-        }
-
-        /* --- REFERAT DIZAYNI (Oq qog'oz effekti) --- */
-        .referat-body {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--white);
-            padding: 80px 100px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            border-radius: 4px;
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: -60px auto 60px;
+            padding: 0 15px;
             position: relative;
             z-index: 10;
         }
 
-        .titul-section {
-            text-align: center;
-            border-bottom: 4px double var(--primary);
-            padding-bottom: 50px;
-            margin-bottom: 80px;
+        /* Section Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(20px, 5vw, 50px); /* Responsive padding */
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        .titul-section h4 { font-family: 'Montserrat'; font-size: 0.8rem; color: #7f8c8d; text-transform: uppercase; }
-        .titul-section h1 { font-family: 'Montserrat'; font-size: clamp(1.5rem, 5vw, 3rem); color: var(--primary); margin: 20px 0; font-weight: 800; }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         h2 {
-            font-family: 'Montserrat';
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
-            color: var(--primary);
-            margin: 60px 0 30px;
-            border-left: 6px solid var(--secondary);
-            padding-left: 20px;
-            background: #f4fcf7;
+            color: var(--primary-color);
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
         }
 
-        p { margin-bottom: 25px; text-align: justify; text-indent: 40px; font-size: 1.1rem; }
+        h2 i {
+            margin-right: 15px;
+            color: var(--accent-color);
+        }
 
-        .img-wrapper { margin: 40px 0; text-align: center; }
-        .img-wrapper img {
+        h3 {
+            margin: 25px 0 15px;
+            color: var(--secondary-color);
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            font-size: clamp(0.95rem, 2vw, 1.05rem);
+        }
+
+        /* Content List */
+        .info-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .info-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .info-list li::before {
+            content: "➜";
+            color: var(--accent-color);
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        /* Image Box */
+        .image-box {
             width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: clamp(250px, 40vh, 500px); /* Responsive height */
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .chart-box {
-            background: #fff;
-            padding: 20px 10px;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            margin: 40px 0;
-            height: 400px;
+        .image-box img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .quote-box {
-            background: #f1f8ff;
-            border-left: 8px solid var(--primary);
-            padding: 30px;
-            margin: 45px 0;
-            font-size: 1.2rem;
-            font-style: italic;
+        .image-box:hover img {
+            transform: scale(1.05);
         }
 
-        footer {
-            margin-top: 100px;
-            border-top: 1px solid #ccc;
-            padding-top: 40px;
-            font-size: 1rem;
-            color: #555;
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 35px 0;
         }
 
-        /* Responsive - Mobil versiya */
-        @media (max-width: 500px) {
-            .referat-body { padding: 40px 15px; width: 100%; box-shadow: none; border-radius: 0; }
-            p { text-indent: 20px; font-size: 1rem; }
-            .chart-box { height: 320px; }
-            body { padding: 0; }
+        .stat-item {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border-top: 5px solid var(--accent-color);
+            box-shadow: 5px 5px 15px #d1d1d1;
+        }
+
+        .stat-number {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .member-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            font-size: 0.95rem;
+            flex: 1 1 250px; /* Responsive cards */
+            max-width: 350px;
+        }
+
+        .man{
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tablets & Mobile Adjustments */
+        @media (max-width: 768px) {
+            header {
+                min-height: 50vh;
+                background-attachment: scroll; /* Performance boost for mobile */
+            }
+            .container {
+                margin-top: -30px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr; /* Stack stats on small phones */
+            }
+            .card {
+                margin-bottom: 25px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Tungi osmon konteyneri -->
-    <div class="sky-container" id="sky"></div>
+    <header>
+        <h1>O‘zbekiston Ta’lim Islohotlari</h1>
+        <p>Bog‘chadan oliygohgacha: Milliy yuksalishning strategik yo‘li va tarixiy natijalar</p>
+    </header>
 
-    <article class="referat-body">
+    <div class="container">
         
-        <header class="titul-section">
-            <h4>O'ZBEKISTON RESPUBLIKASI</h4>
-            <h1>REFERAT</h1>
-            <p style="font-weight: bold; font-size: 1.2rem;">MAVZU: TA’LIM TIZIMIDAGI ISLOHOTLAR (2016-2024)</p>
-        </header>
-
-        <section>
-            <h2>KIRISH</h2>
-            <p>O‘zbekistonda 2016-yildan e'tiboran barcha sohalar qatori ta’lim tizimini tubdan isloh qilish davlat siyosatining ustuvor yo‘nalishiga aylandi. Ta'lim — kelajak poydevori bo'lib, "Yangi O'zbekiston" g'oyasining asosiy ustunidir.</p>
+        <!-- Kirish Section -->
+        <section class="card">
+            <h2><i class="fas fa-info-circle"></i> Umumiy tavsif</h2>
+            <p>Mustaqillik yillarida, ayniqsa 2017-yildan boshlab, O‘zbekistonda inson kapitalini rivojlantirish davlat siyosatining eng muhim yo‘nalishi sifatida belgilandi. "Yangi O‘zbekiston — maktab ostonasidan boshlanadi" degan ezgu g‘oya asosida ta’lim tizimining barcha bo‘g‘inlari tubdan modernizatsiya qilindi. Ushbu islohotlar nafaqat binolarni qurish, balki ta’lim mazmunini xalqaro standartlarga moslashtirishni ham ko‘zda tutadi.</p>
         </section>
 
-        <section id="mtt">
-            <h2>1. MAKTABGACHA TA’LIM TIZIMI</h2>
-            <p>Darslik ma'lumotlariga ko'ra, 2016-yilda bog'chalar soni bor-yo'g'i 4 500 ta edi. Bugun bu ko'rsatkich bir necha barobar oshdi.</p>
+        <!-- 1-Section: Preschool -->
+        <section class="card" id="preschool">
+            <h2><i class="fas fa-child"></i> Maktabgacha ta'lim tizimi</h2>
+            <p>Maktabgacha ta’lim — uzluksiz ta’lim tizimining birlamchi va eng muhim bo‘g‘ini hisoblanadi. 2017-yil 30-sentabrda Maktabgacha ta’lim vazirligining tashkil etilishi bu sohadagi o‘zgarishlarning tamal toshi bo‘ldi.</p>
             
-            <div class="chart-box">
-                <canvas id="mttChart"></canvas>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">8,4 barobar</span>
+                    <span class="stat-desc">Bog‘chalar sonining o‘sish ko‘rsatkichi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">74% +</span>
+                    <span class="stat-desc">Bolalar qamrovi (2024-yil holatiga)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">35 000 +</span>
+                    <span class="stat-desc">Yangi tashkil etilgan oilaviy bog‘chalar</span>
+                </div>
             </div>
 
-            <div class="img-wrapper">
-                <img src="bogcha.jpeg" alt="MTT">
-            </div>
-        </section>
+            <p><strong>Islohotlarning asosiy yo‘nalishlari:</strong></p>
+            <ul class="info-list">
+                <li><strong>Qamrovni kengaytirish:</strong> 2017-yilda bolalarning bog‘chalarga qamrovi bor-yo‘g‘i 27% ni tashkil etgan bo‘lsa, tizimli ishlar natijasida bu ko‘rsatkich qisqa vaqtda keskin oshdi.</li>
+                <li><strong>Davlat-xususiy sheriklik:</strong> Tadbirkorlarga berilgan imtiyozlar natijasida xususiy bog‘chalar tarmog‘i kengaydi.</li>
+                <li><strong>"Aqlvoy" loyihasi:</strong> Olis hududlardagi bolalar uchun mobil bog‘chalar (maxsus jihozlangan avtobuslar) tashkil etildi.</li>
+                <li><strong>Sifat nazorati:</strong> Bog‘cha tarbiyachilarining maoshi oshirildi va ularni oliy ma’lumotli kadrlar bilan ta’minlash darajasi yaxshilandi.</li>
+            </ul>
 
-        <section id="maktab">
-            <h2>2. MAKTAB TA’LIMI: YANGI BOSQICH</h2>
-            <p>2017-yilda 11 yillik majburiy ta'lim tizimining qayta tiklanishi o'quvchilar hayotida muhim o'rin tutdi.</p>
-
-            <div class="quote-box">
-                "Farzandlarimiz maktabdan qanchalik bilimli bo‘lib chiqsa, yuqori texnologiyalarga asoslangan iqtisodiyot tarmoqlari shuncha tez rivojlanadi." - Shavkat Mirziyoyev.
-            </div>
-
-            <div class="img-wrapper">
-                <img src="maktab.webp" alt="Maktab">
-            </div>
-        </section>
-
-        <section id="otm">
-            <h2>3. OLIY TA’LIM TIZIMI</h2>
-            <p>Oliy ta’limda muassasalar soni 2016-yildagi 77 tadan 2024-yilga kelib 222 taga yetkazildi.</p>
-
-            <div class="chart-box">
-                <canvas id="otmChart"></canvas>
-            </div>
-
-            <div class="img-wrapper">
-                <img src="univer.webp" alt="OTM">
+            <div class="image-box">
+                <img src="https://hidoya.uz/storage/4d/2e/7b/1199/conversions/ta'lim-large.jpg" alt="Maktabgacha ta'lim">
             </div>
         </section>
 
-        <section>
-            <h2>XULOSA</h2>
-            <p>Xulosa qilib aytganda, O‘zbekiston ta’lim sohasidagi islohotlar keng qamrovli va strategik xarakterga ega bo'lib, sifatli kadrlar tayyorlashga xizmat qilmoqda.</p>
+        <!-- 2-Section: General Secondary -->
+        <section class="card" id="school">
+            <h2><i class="fas fa-school"></i> Umumiy o‘rta ta’lim islohotlari</h2>
+            <p>Maktab ta’limida eng katta o‘zgarishlardan biri — 11 yillik majburiy umumiy o‘rta ta’limning qayta tiklanishi bo‘ldi. Bu yoshlarning professional tayyorgarligi va ijtimoiy moslashuvi uchun mustahkam zamin yaratdi.</p>
+            
+            <h3>Ixtisoslashtirilgan va Prezident maktablari</h3>
+            <p>Iqtidorli yoshlarni saralash va ularga jahon andozalari darajasida bilim berish uchun yangi turdagi maktablar tarmog‘i yo‘lga qo‘yildi:</p>
+            <ul class="info-list">
+                <li><strong>Prezident maktablari:</strong> Kembrij o‘quv dasturi asosida ishlaydigan, tanqidiy fikrlash va yetakchilik qobiliyatini rivojlantiruvchi muassasalar.</li>
+                <li><strong>Ijod maktablari:</strong> Abdulla Qodiriy, Halima Xudoyberdiyeva kabi adiblar nomi bilan atalgan, ona tili va adabiyotni chuqur o‘rgatuvchi maktablar.</li>
+                <li><strong>Ixtisoslashgan maktablar:</strong> Muhammad al-Xorazmiy (IT), Mirzo Ulug‘bek (fizika, matematika), Abu Ali ibn Sino (kimyo, biologiya) nomidagi maktablar.</li>
+            </ul>
+
+            <div class="image-box">
+                <img src="https://aniq.uz/photos/news/xWtbG5SLtj9yTrp.jpeg" alt="Maktab ta'limi">
+            </div>
+
+            <p><strong>Zamonaviy infratuzilma:</strong> "Zamonaviy maktab" loyihasi doirasida minglab maktablar rekonstruksiya qilindi, yuqori tezlikdagi internet va zamonaviy kompyuter sinflari bilan jihozlandi. O‘qituvchilarning ijtimoiy mavqeyini oshirish maqsadida ularning ish haqi sezilarli darajada ko‘paytirildi.</p>
         </section>
 
-        <footer>
-            <p><b>MANBALAR:</b> 11-sinf O'zbekiston tarixi darsligi (66-70 betlar). </p>
-            <p style="text-align: center; margin-top: 40px; opacity: 0.5;">© 2024 Akademik Referat</p>
-        </footer>
-    </article>
+        <!-- 3-Section: Higher Education -->
+        <section class="card" id="higher-edu">
+            <h2><i class="fas fa-university"></i> Oliy ta’limdagi tub burilishlar</h2>
+            <p>Oliy ta’lim tizimi "Yangi O‘zbekiston — 2030" strategiyasining markaziy bo‘g‘inidir. So‘nggi 7 yil ichida oliy ta’lim muassasalari soni misli ko‘rilmagan darajada o‘sdi.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item" style="border-top-color: var(--secondary-color);">
+                    <span class="stat-number">222 ta</span>
+                    <span class="stat-desc">OTMlar umumiy soni (2016-yili 77 ta edi)</span>
+                </div>
+                <div class="stat-item" style="border-top-color: var(--secondary-color);">
+                    <span class="stat-number">38% +</span>
+                    <span class="stat-desc">Oliy ta’lim bilan qamrov darajasi</span>
+                </div>
+                <div class="stat-item" style="border-top-color: var(--secondary-color);">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-desc">Xorijiy universitetlar filiallari</span>
+                </div>
+            </div>
+
+            <p><strong>Asosiy yutuqlar:</strong></p>
+            <ul class="info-list">
+                <li><strong>Akademik va moliyaviy mustaqillik:</strong> 40 dan ortiq yetakchi davlat oliygohlariga o‘zini-ozi moliyalashtirish va o‘quv dasturlarini mustaqil belgilash huquqi berildi.</li>
+                <li><strong>Kredit-modul tizimi:</strong> Xalqaro ECTS tizimiga o‘tilishi talabalarning mobilligini va ta’lim sifatini oshirdi.</li>
+                <li><strong>Ikki diplomli dasturlar (Double Degree):</strong> Dunyoning nufuzli universitetlari bilan hamkorlikda talabalar ham O‘zbekiston, ham xorij diplomini olish imkoniyatiga ega bo‘ldilar.</li>
+                <li><strong>Xotin-qizlar ta’limi:</strong> Ehtiyojmand oilalardan bo‘lgan xotin-qizlar uchun alohida grantlar va foizsiz ta’lim kreditlari joriy etildi.</li>
+            </ul>
+
+            <div class="image-box">
+                <img src="https://static.imtihonlar.uz/crop/2/2/832__85_2248930832.jpg?t=1722457759" alt="Oliy ta'lim">
+            </div>
+            <p><strong>Kelajak maqsadi:</strong> 2030-yilga qadar kamida 10 ta milliy universitetni dunyoning Top-1000 talik reytingiga (QS, Times Higher Education) kiritish asosiy vazifa etib belgilangan.</p>
+        </section>
+
+        <!-- Xulosa -->
+        <section class="card">
+            <h2><i class="fas fa-check-circle"></i> Xulosa</h2>
+            <p>Xulosa qilib aytganda, O‘zbekistonda amalga oshirilayotgan ta’lim islohotlari kompleks xarakterga ega. Bog‘cha, maktab va oliygoh o‘rtasidagi uzviylikni ta’minlash orqali mamlakatimiz yangi intellektual avlodni tarbiyalashni maqsad qilgan. Ushbu islohotlar O‘zbekistonning jahon hamjamiyatida raqobatbardosh davlatga aylanishi uchun eng asosiy omil bo‘lib xizmat qiladi.</p>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <h3>Referatni tayyorlovchilar:</h3>
+        <div class="team-grid">
+            <div class="member-card">1. Alem Xaknazarov</div>
+            <div class="member-card">2. Turg'unova Nazokat</div>
+            <div class="member-card">3. Yuldoshev Ergashxo'ja</div>
+        </div>
+        <div class="man" >
+            <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
+                Manba: 11-sinf "O'zbekiston tarixi" darsligi, 10-mavzu (66–70-betlar).<br>
+                © 2026 Barcha huquqlar himoyalangan.
+            </p>
+        </div>
+    </footer>
 
     <script>
-        // --- TUNGI OSMON GENERATORI ---
-        function createNightSky() {
-            const sky = document.getElementById('sky');
-            
-            // 1. Miltillovchi mitti yulduzlarni yaratish
-            for (let i = 0; i < 150; i++) {
-                const star = document.createElement('div');
-                star.className = 'star-point';
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                const size = Math.random() * 3;
-                const duration = 2 + Math.random() * 5;
-
-                star.style.left = x + 'vw';
-                star.style.top = y + 'vh';
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.setProperty('--duration', duration + 's');
-                sky.appendChild(star);
-            }
-
-            // 2. Uchayotgan sariq yulduzlarni yaratish funksiyasi
-            function createShootingStar() {
-                const sStar = document.createElement('div');
-                sStar.className = 'shooting-star';
-                const x = 50 + Math.random() * 50; // O'ng tomondan boshlash
-                const y = Math.random() * 50; // Yuqoridan boshlash
-                const speed = 2 + Math.random() * 3;
-
-                sStar.style.left = x + 'vw';
-                sStar.style.top = y + 'vh';
-                sStar.style.setProperty('--speed', speed + 's');
-                
-                sky.appendChild(sStar);
-
-                // Animatsiyadan keyin elementni o'chirish
-                setTimeout(() => {
-                    sStar.remove();
-                }, speed * 1000);
-            }
-
-            // Har 2 soniyada bitta uchayotgan yulduz chiqarish
-            setInterval(createShootingStar, 2000);
-        }
-        createNightSky();
-
-        // --- DIAGRAMMALAR ---
-        const labelsPlugin = {
-            id: 'labelsPlugin',
-            afterDatasetsDraw(chart) {
-                const { ctx } = chart;
-                ctx.save();
-                ctx.font = 'bold 11px Montserrat';
-                ctx.fillStyle = '#1a1a1a';
-                ctx.textAlign = 'center';
-                chart.data.datasets.forEach((dataset, i) => {
-                    chart.getDatasetMeta(i).data.forEach((datapoint, index) => {
-                        const value = dataset.data[index];
-                        ctx.fillText(value, datapoint.x, datapoint.y - 12);
-                    });
-                });
-            }
+        // Scroll animatsiyasini boshqarish
+        const cards = document.querySelectorAll('.card');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
         };
 
-        const chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { display: false, beginAtZero: true },
-                x: { grid: { display: false }, ticks: { font: { size: 10, family: 'Montserrat', weight: '600' } } }
-            }
-        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-        new Chart(document.getElementById('mttChart'), {
-            type: 'line',
-            plugins: [labelsPlugin],
-            data: {
-                labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-                datasets: [{
-                    data: [5211, 7104, 13530, 18254, 27609, 29420, 30792, 38000],
-                    borderColor: '#1e8449',
-                    backgroundColor: 'rgba(30, 132, 73, 0.1)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: chartOptions
+        cards.forEach(card => {
+            observer.observe(card);
         });
 
-        new Chart(document.getElementById('otmChart'), {
-            type: 'bar',
-            plugins: [labelsPlugin],
-            data: {
-                labels: ['2016', '2021', '2022', '2023', '2024'],
-                datasets: [{
-                    data: [77, 130, 199, 213, 222],
-                    backgroundColor: '#003366',
-                    borderRadius: 6
-                }]
-            },
-            options: chartOptions
+        // Yumshoq skroll effekti
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
     </script>
 </body>
